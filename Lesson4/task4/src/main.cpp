@@ -3,38 +3,72 @@
 #include <algorithm>
 //using namespace std;
 
-std::vector<int> plus(const std::vector<int> &A, const std::vector<int> &B, int base)
+std::vector<int> plus(const std::vector<int> &A, const std::vector<int> &B, uint base)
 {
-//    uint sizeA = A.size();
-//    uint sizeB = B.size();
-//    uint sizeC = sizeA >= sizeB ? sizeA + 1 : sizeB + 1;
     std::vector<int> C;
-    C = B;
+    std::vector<int>::const_reverse_iterator itA = A.rbegin();
+    std::vector<int>::const_reverse_iterator itB = B.rbegin();
     int digit = 0;
-    for(int i = C.size()-1, j = A.size() - 1; i > 0; --i)
+
+    do
     {
-        if(j >= 0)
-            digit += A.at(j);
-        digit += C[i];
-        C[i] = (C[i] + digit) % base;
-        if((digit /= base) && (i > 0))
-            C[i-1] += digit;
-        else
-            C.insert(C.begin(), digit);
+        if(itA != A.rend())
+        {
+            digit += *itA;
+            itA++;
+        }
+        if(itB != B.rend())
+        {
+            digit += *itB;
+            itB++;
+        }
+        C.insert(C.begin(),digit % base);
+        digit /= base;
+    }while(itA != A.rend() || itB != B.rend());
 
-    }
-
+    if(digit)
+        C.insert(C.begin(), digit);
 
     return C;
 }
 
+std::pair<std::vector<int>,int> div(const std::vector<int> &A, uint baseIn, uint divider)
+{
+    std::vector<int> C;
+    std::vector<int>::const_iterator it = A.begin();
+    int digit = 0;
+
+    do
+    {
+        digit = digit*baseIn + *it;
+        if(digit/divider)
+        {
+            C.push_back(digit/divider);
+            digit = digit % divider;
+        }
+        else
+        {
+            digit = *it;
+        }
+        it++;
+    }while(it != A.end());
+
+    return std::pair<std::vector<int>,int>(C,digit);;
+}
+
 void printVector(const std::vector<int> A)
 {
-    std::for_each(A.begin(),A.end(),[](const int &n){ std::cout << n; });
+
+    std::for_each(A.begin(),A.end(),[](const int &n)
+    {
+        const char *c = "0123456789ABCDEFGHIJKLMNOPRSTUVWXYZ";
+        std::cout << c[n];
+    });
+
     std::cout << std::endl;
 }
 
-std::vector<int> convertBase(const std::vector<int> A, uint8_t baseIn, uint8_t baseOut)
+std::vector<int> convertBase(const std::vector<int> A, uint baseIn, uint baseOut)
 {
     std::vector<int> C;
     std::vector<int> temp;
@@ -51,20 +85,46 @@ std::vector<int> convertBase(const std::vector<int> A, uint8_t baseIn, uint8_t b
     return C;
 }
 
-std::vector<int> plus(const std::vector<int> &A, int baseA, const std::vector<int> &B, int baseB, int baseResult)
+std::vector<int> convertBase2(const std::vector<int> A, uint baseIn, uint baseOut)
+{
+    std::vector<int> C;
+    std::vector<int> t = A;
+    std::pair<std::vector<int>,int> p;
+
+    do
+    {
+        p = div(t,baseIn,baseOut);
+        C.insert(C.begin(), p.second);
+        t = p.first;
+    }while(t.size() > 1 || t[0] > baseOut);
+    C.insert(C.begin(), t[0]);
+    return C;
+}
+
+std::vector<int> plus(const std::vector<int> &A, uint baseA, const std::vector<int> &B, uint baseB, int baseResult)
 {
     return plus(convertBase(A, baseA, baseResult), convertBase(B, baseB, baseResult), baseResult);
 }
 
 int main(int argc, char** args)
 {
-    std::vector<int> A {6,4};
-    std::vector<int> B {6,4};
+    enum n {A=10,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,V,W,X,Y,Z};
+    std::vector<int> vA {F,F};
+    uint baseA = 16;
+    std::vector<int> vB {H,E,L,L,O};
+    uint baseB = 36;
 
-    printVector(convertBase(A, 16, 10));
-    printVector(convertBase(B, 16, 10));
+    std::cout << "Number A in a positional base "<< baseA <<" numeral system:" << std::endl;
+    printVector(convertBase2(vA, baseA, baseA));
+    std::cout << "Number A in a positional base 10 numeral system:" << std::endl;
+    printVector(convertBase2(vA, baseA, 10));
+    std::cout << "Number B in a positional base "<< baseB <<" numeral system:" << std::endl;
+    printVector(convertBase2(vB, baseB, baseB));
+    std::cout << "Number B in a positional base 10 numeral system:" << std::endl;
+    printVector(convertBase2(vB, baseB, 10));
 
-    //printVector(plus(A, 16, B, 16, 10));
+    std::cout << "Result A + B in a positional base 2 numeral system:" << std::endl;
+    printVector(plus(vA, baseA, vB, baseB, 2));
 
   return 0;
 }
