@@ -1,24 +1,26 @@
 #ifndef CARD_H
 #define CARD_H
+#include <string>
 
+using std::string;
 
 class Card
 {
 public:
-  enum eSuit {heart, diamond, club, spade};
-  enum eValue {Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King} ;
+  enum class eSuit {heart, diamond, club, spade};
+  enum class eRank {Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
 private:
-  const char *suit_names[4] { "♥", "♦", "♣" ,"♠"};
-  const char *value_names[13] {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-  const int values[13] {1,2,3,4,5,6,7,8,9,10,10,10,10};
-  eSuit suit;
-  eValue card;
-  bool bFaceUp = false;
-public:
-    Card(eSuit s, eValue v);
-    void Flip();
-    int GetValue();
 
+  const eSuit m_suit;
+  const eRank m_rank;
+  bool m_FaceUp = false;
+public:
+    Card(eSuit s, eRank r);
+    void Flip();
+    //int GetValue();
+    eRank GetRank() const;
+    eSuit GetSuit() const;
+//    const char *GetCard();
 };
 
 #endif // CARD_H
