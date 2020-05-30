@@ -4,6 +4,7 @@
 
 class Deck
 {
+
 public:
     Deck();
 };

@@ -2,10 +2,10 @@
 #define DEALER_H
 #include "hand.h"
 
-class Dealer : public Hand
+class House : public Hand
 {
 public:
-    Dealer();
+    House();
 };
 
 #endif // DEALER_H
