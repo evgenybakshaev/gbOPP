@@ -1,10 +1,9 @@
 #include <iostream>
 
-using namespace std;
 
+using namespace std;
 int main(int argc, char** args)
 {
-
-
-    return 0;
+  
+  return 0;
 }
