@@ -2,7 +2,6 @@
 
 Hand::Hand()
 {
-
 }
 
 void Hand::Add(Card *card)
