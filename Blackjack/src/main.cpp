@@ -18,5 +18,8 @@ int main(int argc, char** args)
     h.Add(new Card(eSuit::heart, eRank::Ace));
     cout << h.GetCards() << endl;
     cout << "Player have " << h.GetTotal() << " points" << endl;
+    h.Clear();
+    h.Add(new Card(eSuit::club, eRank::Ace));
+    cout << h.GetCards() << endl;
     return 0;
 }

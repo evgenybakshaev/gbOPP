@@ -12,6 +12,11 @@ void Hand::Add(Card *card)
 
 void Hand::Clear()
 {
+    for_each(m_cards.begin(), m_cards.end(), [](Card *card)
+    {
+        delete card;
+    });
+
     m_cards.clear();
 }
 
