@@ -3,6 +3,7 @@
 #include <algorithm>
 //using namespace std;
 
+
 std::vector<int> plus(const std::vector<int> &A, const std::vector<int> &B, uint8_t base)
 {
     std::vector<int> C;
@@ -33,6 +34,7 @@ std::vector<int> plus(const std::vector<int> &A, const std::vector<int> &B, uint
 }
 
 std::pair<std::vector<int>,int> div(const std::vector<int> &A, uint8_t baseIn, uint8_t divider)
+
 {
     std::vector<int> C;
     std::vector<int>::const_iterator it = A.begin();
@@ -68,6 +70,7 @@ void printVector(const std::vector<int> A)
     std::cout << std::endl;
 }
 
+
 std::vector<int> convertBase(const std::vector<int> A, uint8_t baseIn, uint8_t baseOut)
 {
     std::vector<int> C;
@@ -84,6 +87,7 @@ std::vector<int> convertBase(const std::vector<int> A, uint8_t baseIn, uint8_t b
     }
     return C;
 }
+
 
 std::vector<int> convertBase2(const std::vector<int> A, uint8_t baseIn, uint8_t baseOut)
 {
@@ -110,6 +114,7 @@ int main(int argc, char** args)
 {
     enum n {A=10,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,R,S,T,U,V,W,X,Y,Z};
     std::vector<int> vA {F,F};
+
     uint8_t baseA = 16;
     std::vector<int> vB {H,E,L,L,O};
     uint8_t baseB = 36;
