@@ -8,8 +8,6 @@
 class Hand
 {
 private:
-    static constexpr const char *suit_names[5] {"♥", "♦", "♣", "♠", "☷"};
-    static constexpr const char *rank_names[14] {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "☷"};
     static constexpr int rank_values[13] {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
 protected:
     std::vector<Card*> m_cards;
@@ -18,8 +16,8 @@ public:
 
     void Add(Card *card);
     void Clear();
-    int GetTotal();
-    const std::string GetCards();
+    int GetTotal() const;
+    //const std::string GetCards();
 };
 
 
