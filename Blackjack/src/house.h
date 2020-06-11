@@ -12,5 +12,4 @@ public:
     void FlipFirstCard();
 };
 
-
 #endif // DEALER_H

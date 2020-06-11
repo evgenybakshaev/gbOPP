@@ -2,6 +2,7 @@
 #define CARD_H
 #include <string>
 #include <iostream>
+
 using std::string;
 
 class Card
@@ -21,6 +22,7 @@ public:
     eRank GetRank() const;
     eSuit GetSuit() const;
     bool IsFaceUp() const;
+
 
 };
 

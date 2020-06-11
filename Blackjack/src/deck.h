@@ -5,6 +5,7 @@
 
 class Deck : public Hand
 {
+
 public:
     Deck();
     virtual ~Deck();

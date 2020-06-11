@@ -37,15 +37,3 @@ int Hand::GetTotal() const
     return total;
 }
 
-//const std::string Hand::GetCards()
-//{
-//    std::string s;
-//    for_each(m_cards.begin(), m_cards.end(), [&s](Card *card)
-//    {
-//        s += suit_names[static_cast<int>(card->GetSuit())];
-//        s += rank_names[static_cast<int>(card->GetRank())];
-//        s += " ";
-//    });
-//    return s.c_str();
-//}
-
